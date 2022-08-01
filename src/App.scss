@@ -8,5 +8,48 @@ body {
 
   .modal {
     display: block;
-    background-color: rgba(4, 202, 166, 0.5);
+    background-color: rgba(60, 244, 210, 0.5);
+  }
+
+
+  .show-message {
+    display: flex;
+    position: absolute;
+    bottom: 50px;
+    right: 0px;
+    width: 100%;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 1;
+    .alert-danger {
+      color: #721c24;
+      background-color: #f8d7dac2;
+    }
+    .alert-info {
+      color: #0c5460;
+      background-color: #d1ecf1c2;
+    }
+    .alert-success {
+      color: #155724;
+      background-color: #d4eddac2;
+    }
+    div {
+      width: 30%;
+      margin-right: 50px;
+    }
+  }
+
+  .content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #0c5460;
+    
+  }
+  .b{
+    background-color: #721c24;
+    color: rgb(154, 33, 33)
   }

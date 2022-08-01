@@ -17,7 +17,7 @@ function Edit() {
     const data = { title, id: modalCat.id };
     setEditCat(data);
     setModalCat(null);
-  }; 
+  };
 
   if (null === modalCat) {
     return null;

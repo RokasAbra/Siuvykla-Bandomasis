@@ -9,18 +9,20 @@ import { authConfig } from "../Functions/auth";
 function Back({ show }) {
   const [lastUpdate, setLastUpdate] = useState(Date.now());
 
+  //Categories
   const [categories, setCategories] = useState(null);
   const [createCat, setCreateCat] = useState(null);
   const [deleteCat, setDeleteCat] = useState(null);
   const [editCat, setEditCat] = useState(null);
   const [modalCat, setModalCat] = useState(null);
 
+
   //Categories Crud
   // Create
   useEffect(() => {
     if (null === createCat) return;
     axios
-      .post("http://localhost:3003/admin/categories", createCat)
+      .post("http://localhost:3003/admin/categories/", createCat)
       .then((res) => {
         showMessage(res.data.msg);
         setLastUpdate(Date.now());
@@ -32,13 +34,13 @@ function Back({ show }) {
 
   //Read 
    useEffect(() => {
-    axios.get('http://localhost:3003/admin/categories', authConfig())
+    axios.get('http://localhost:3003/admin/categories/', authConfig())
         .then(res => setCategories(res.data));
 }, [lastUpdate]);
   //Update
   useEffect(() => {
     if (null === editCat) return;
-    axios.put('http://localhost:3003/admin/categories' + editCat.id, editCat)
+    axios.put('http://localhost:3003/admin/categories/' + editCat.id, editCat)
       .then(res => {
         showMessage(res.data.msg);
         setLastUpdate(Date.now());
@@ -58,6 +60,72 @@ function Back({ show }) {
             })
     }, [deleteCat]);
 
+//Products 
+
+const [products, setProducts] = useState(null);
+const [createProduct, setCreateProduct] = useState(null);
+const [deleteProduct, setDeleteProduct] = useState(null);
+const [editProduct, setEditProduct] = useState(null);
+const [modalProduct, setModalProduct] = useState(null);
+const [deletePhoto, setDeletePhoto] = useState(null);
+
+
+//Products
+  //Create 
+  useEffect(() => {
+    if (null === createProduct) return;
+    axios.post('http://localhost:3003/admin/products/', createProduct, authConfig())
+        .then(res => {
+            showMessage(res.data.msg);
+            setLastUpdate(Date.now());
+        })
+        .catch(error => {
+            showMessage({ text: error.message, type: 'danger' });
+        })
+}, [createProduct]);
+  //Read 
+  useEffect(() => {
+    axios.get('http://localhost:3003/admin/products/', authConfig())
+        .then(res => setProducts(res.data));
+}, [lastUpdate]);
+    //Delete 
+    useEffect(() => {
+        if (null === deleteProduct) return;
+        axios.delete('http://localhost:3003/admin/products/' + deleteProduct.id, authConfig())
+            .then(res => {
+                showMessage(res.data.msg);
+                setLastUpdate(Date.now());
+            })
+            .catch(error => {
+                showMessage({ text: error.message, type: 'danger' });
+            })
+    }, [deleteProduct]);
+    //Edit
+    useEffect(() => {
+        if (null === editProduct) return;
+        axios.put('http://localhost:3003/admin/products/' + editProduct.id, editProduct, authConfig())
+            .then(res => {
+                showMessage(res.data.msg);
+                setLastUpdate(Date.now());
+            })
+            .catch(error => {
+                showMessage({ text: error.message, type: 'danger' });
+            })
+    }, [editProduct]);
+
+    //Photo delete
+
+    useEffect(() => {
+        if (null === deletePhoto) return;
+        axios.delete('http://localhost:3003/admin/photos/' + deletePhoto.id, authConfig())
+            .then(res => {
+                showMessage(res.data.msg);
+                setLastUpdate(Date.now());
+            })
+            .catch(error => {
+                showMessage({ text: error.message, type: 'danger' });
+            })
+    }, [deletePhoto]);
 
   //Messages window
   const [messages, setMessages] = useState([]);
@@ -81,7 +149,14 @@ function Back({ show }) {
         modalCat,
         categories,
         setDeleteCat,
-        setEditCat
+        setEditCat,
+        setCreateProduct,
+        products,
+        setDeleteProduct,
+        setEditProduct,
+        setModalProduct,
+        modalProduct,
+        setDeletePhoto
       }}
     >
       {show === "admin" ? (
