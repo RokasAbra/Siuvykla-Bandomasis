@@ -40,16 +40,23 @@ body {
     }
   }
 
-  .content{
-    display: flex;
-    align-items: center;
+  .item{
+    display: grid;
+    grid-template-columns: 150px 150px 180px 150px;
     justify-content: space-between;
     width: 100%;
     padding: 5px;
     border: 1px solid #0c5460;
     
   }
+  
   .b{
     background-color: #721c24;
     color: rgb(154, 33, 33)
+  }
+
+  .photo-bin img{
+    max-width: 150px;
+    max-height: 150px;
+    
   }
